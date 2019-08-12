@@ -1,15 +1,19 @@
 import React, { Fragment, useState } from 'react';
 
-const BudgetInput = () => {
-  const [budget, setBudget] = useState(0);
+const BudgetInput = (setBudget, setBudgetExist) => {
+  const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (budget <= 0 || !budget) {
+
+    if (quantity <= 0 || !quantity) {
       setError(true);
       return;
     }
+    setError(false);
+    setBudget(quantity);
+    setBudgetExist(true);
   };
 
   return (
@@ -24,7 +28,7 @@ const BudgetInput = () => {
           type="number"
           className="u-full-width"
           placeholder="Add your budget"
-          onChange={e => setBudget(parseInt(e.target.value))}
+          onChange={e => setQuantity(parseInt(e.target.value))}
         />
         <input
           type="submit"
