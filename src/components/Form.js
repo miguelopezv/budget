@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import Error from './Error';
+import shortid from 'shortid';
 
-const Form = () => {
-  const [expense, setExpense] = useState({ label: '', quantity: 0 });
+const Form = ({ setItem }) => {
+  const initialExpense = {
+    id: shortid.generate(),
+    label: '',
+    quantity: ''
+  };
+
+  const [expense, setExpense] = useState(initialExpense);
   const [error, setError] = useState(false);
 
   const handleChange = e => {
@@ -21,7 +28,9 @@ const Form = () => {
       return;
     }
 
+    setItem(expense);
     setError(false);
+    setExpense(initialExpense);
   };
 
   return (
@@ -37,6 +46,7 @@ const Form = () => {
           className="u-full-width"
           name="label"
           placeholder="e.g: lunch"
+          value={expense.label}
           onChange={handleChange}
         />
       </div>
@@ -47,6 +57,7 @@ const Form = () => {
           name="quantity"
           className="u-full-width"
           placeholder="e.g: 300"
+          value={expense.quantity}
           onChange={handleChange}
         />
       </div>
