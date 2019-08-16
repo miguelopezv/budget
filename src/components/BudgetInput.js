@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
+import Error from './Error';
 
-const BudgetInput = (setBudget, setBudgetExist) => {
+const BudgetInput = ({ setBudget, setBudgetExist }) => {
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState(false);
 
@@ -20,9 +21,7 @@ const BudgetInput = (setBudget, setBudgetExist) => {
     <Fragment>
       <h2>Add your budget</h2>
 
-      {error ? (
-        <p className="alert alert-danger error">Budget is incorrect</p>
-      ) : null}
+      {error ? <Error message="Budget is incorrect" /> : null}
       <form onSubmit={handleSubmit}>
         <input
           type="number"
