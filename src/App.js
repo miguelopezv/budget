@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BudgetInput, Form, ExpensesList } from './components';
+import {
+  BudgetInput,
+  Form,
+  ExpensesList,
+  BudgetController
+} from './components';
 
 function App() {
   const [budget, setBudget] = useState(0);
+  const [remaining, setRemaining] = useState(0);
   const [budgetexist, setBudgetExist] = useState(false);
   const [item, setItem] = useState({});
   const [expenses, setExpenses] = useState([]);
@@ -13,6 +19,10 @@ function App() {
     const expenseArray = [...expenses, item];
     setExpenses(expenseArray);
   }, [item]);
+
+  useEffect(() => {
+    if (budget) setRemaining(budget);
+  }, [budget]);
 
   return (
     <div className="App container">
@@ -29,6 +39,7 @@ function App() {
             </div>
             <div className="one-half column">
               <ExpensesList expenses={expenses} />
+              <BudgetController budget={budget} remaining={remaining} />
             </div>
           </div>
         )}
