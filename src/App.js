@@ -16,11 +16,8 @@ function App() {
   useEffect(() => {
     if (!Object.keys(item).length) return;
 
-    const expenseArray = [...expenses, item];
-    const remainingBudget = remaining - item.quantity;
-
-    setRemaining(remainingBudget);
-    setExpenses(expenseArray);
+    setRemaining(remaining => remaining - item.quantity);
+    setExpenses(expenses => [...expenses, item]);
   }, [item]);
 
   useEffect(() => {
